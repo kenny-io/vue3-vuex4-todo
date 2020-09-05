@@ -1,18 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <AddTodo />
+    <FilterTodos />
+    <Todos />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+// import HelloWorld from "./components/HelloWorld.vue";
+import AddTodo from "@/components/AddTodo.vue";
+import Todos from "@/components/Todos.vue";
+import FilterTodos from "@/components/FilterTodos.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld
-  }
+    // HelloWorld
+    AddTodo,
+    Todos,
+    FilterTodos,
+  },
 };
 </script>
 
