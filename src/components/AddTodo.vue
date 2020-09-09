@@ -11,7 +11,6 @@
 <script>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-// import axios from
 export default {
   name: "AddTodo",
   setup() {
@@ -26,11 +25,6 @@ export default {
         title: title.value,
         id: id.value++,
       });
-
-      // store.commit("fetchTodos", {
-      //   item: title.value,
-      //   id: id.value++,
-      // });
       title.value = "";
     };
 

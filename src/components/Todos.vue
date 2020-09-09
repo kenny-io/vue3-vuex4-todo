@@ -5,7 +5,10 @@
       <span> <span class="incomplete-box"></span> = Incomplete </span>
       <span> <span class="complete-box"></span> = Complete </span>
     </div>
-    <div class="todos">
+    <div>
+      <button class="hide" @click="toggleVisibility">Hide Todos</button>
+    </div>
+    <div v-if="isVisible" class="todos">
       <div
         v-for="todo in todos"
         :key="todo.id"
@@ -21,14 +24,15 @@
 </template>
 <script>
 import { useStore } from "vuex";
-// import axios from "axios";
 import { computed, onMounted } from "vue";
+import { useToggle } from "@/composables/useToggle";
 
 export default {
   name: "Todos",
   setup() {
-    //Init vuex store instance
     const store = useStore();
+
+    // todos
     const todos = computed(() => store.state.todos);
     onMounted(() => {
       store.dispatch("onFetchTodos");
@@ -47,26 +51,17 @@ export default {
       store.dispatch("onUpdateTodo", updatedTodo);
     };
 
+    // visibility
+    const { isVisible, toggleVisibility } = useToggle();
+
     return {
       todos,
-      //count,
+      isVisible,
+      toggleVisibility,
       deleteTodo,
       updateTodo,
     };
   },
-  // setup() runs before the component is created so we don't need to fetch
-  // todos from the store in a created() hook like we did in Vue 2
-  // const getTodos = async () => {
-  //   const response = await axios.get(
-  //     "https://jsonplaceholder.typicode.com/todos"
-  //   );
-  //   const data = response.data;
-  //   store.commit("setTodos", data);
-  // };
-  // getTodos();
-  // Need to figure out how to do ...mapGetters(["allTodos"]) and ...mapActions in Vuex 4
-  // UPDATE-- The vuex4 docs is still vague and doesn't provide a
-  // standard way of using mapGetters/mapActions yet
 };
 </script>
 
@@ -112,6 +107,15 @@ i {
 .is-complete {
   background: #35495e;
   color: #fff;
+}
+.hide {
+  background: #a7b597;
+  color: #fff;
+  border: 1px #a7b597 solid;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 500px) {
