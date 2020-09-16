@@ -19,13 +19,19 @@ export default Vuex.createStore({
   },
   actions: {
     onFetchTodos: async ({ commit }) => {
-      console.log("Action dispatched");
       const response = await Axios.get(
         "https://jsonplaceholder.typicode.com/todos"
       );
       commit(ACTION_TYPES.fetchTodos, response.data);
     },
-    onAddTodo: ({ commit }, todo) => commit(ACTION_TYPES.addTodo, todo),
+    onAddTodo: async ({ commit }, title) => {
+      const response = await Axios.post(
+        "https://jsonplaceholder.typicode.com/todos",
+        { title, completed: false }
+      );
+      console.log(response);
+      commit(ACTION_TYPES.addTodo, response.data);
+    },
     onDeleteTodo: ({ commit }, id) => {
       Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
       commit(ACTION_TYPES.deleteTodo, id);

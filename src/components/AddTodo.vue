@@ -9,31 +9,26 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "AddTodo",
   setup() {
     const store = useStore();
     const title = ref("");
-    const id = ref(store.state.todos.length);
-    const items = computed(() => store.state.todos);
-
-    const addNewTodo = (e) => {
+    const addNewTodo = e => {
       e.preventDefault();
       store.dispatch("onAddTodo", {
-        title: title.value,
-        id: id.value++,
+        title: title.value
       });
       title.value = "";
     };
 
     return {
       title,
-      addNewTodo,
-      items,
+      addNewTodo
     };
-  },
+  }
 };
 </script>
 

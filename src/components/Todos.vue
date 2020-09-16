@@ -2,8 +2,12 @@
   <div>
     <div class="legend">
       <span>Double click to mark as complete</span>
-      <span> <span class="incomplete-box"></span> = Incomplete </span>
-      <span> <span class="complete-box"></span> = Complete </span>
+      <span>
+        <span class="incomplete-box"></span> = Incomplete
+      </span>
+      <span>
+        <span class="complete-box"></span> = Complete
+      </span>
     </div>
     <div>
       <button class="hide" @click="toggleVisibility">Hide Todos</button>
@@ -38,15 +42,15 @@ export default {
       store.dispatch("onFetchTodos");
     });
 
-    const deleteTodo = (id) => {
+    const deleteTodo = id => {
       store.dispatch("onDeleteTodo", id);
     };
 
-    const updateTodo = (todo) => {
+    const updateTodo = todo => {
       const updatedTodo = {
         title: todo.title,
         id: todo.id,
-        completed: !todo.completed,
+        completed: !todo.completed
       };
       store.dispatch("onUpdateTodo", updatedTodo);
     };
@@ -59,9 +63,9 @@ export default {
       isVisible,
       toggleVisibility,
       deleteTodo,
-      updateTodo,
+      updateTodo
     };
-  },
+  }
 };
 </script>
 

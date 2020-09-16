@@ -12,7 +12,7 @@
 import { ref } from "vue";
 import { useStore } from "vuex";
 export default {
-  name: "HelloWorld",
+  name: "FilterTodos",
 
   setup() {
     const limit = ref(200);
@@ -23,9 +23,9 @@ export default {
 
     return {
       limit,
-      filterTodos,
+      filterTodos
     };
-  },
+  }
 };
 </script>
 
